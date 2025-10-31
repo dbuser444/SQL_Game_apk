@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- 1. Иконка / Индикатор -->
+        <ImageView
+            android:id="@+id/image_lesson_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_lesson_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <!-- 2. Заголовок урока -->
+        <TextView
+            android:id="@+id/text_lesson_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toStartOf="@+id/text_required_level"
+            app:layout_constraintStart_toEndOf="@+id/image_lesson_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Основы SQL: SELECT и FROM" />
+
+        <!-- 3. Краткое описание -->
+        <TextView
+            android:id="@+id/text_lesson_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintEnd_toStartOf="@+id/text_required_level"
+            app:layout_constraintStart_toStartOf="@+id/text_lesson_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_lesson_title"
+            tools:text="Изучите базовые операторы для выборки данных из таблиц и их синтаксис." />
+
+        <!-- 4. Требуемый уровень (справа) -->
+        <TextView
+            android:id="@+id/text_required_level"
+            android:layout_width="41dp"
+            android:layout_height="27dp"
+            android:background="@drawable/rounded_level_tag"
+            android:padding="6dp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="УР. 1" />
+
+        <!-- 5. Индикатор сложности -->
+        <LinearLayout
+            android:id="@+id/difficulty_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/text_lesson_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_lesson_description"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сложность:"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginEnd="4dp" />
+
+            <!-- Звезды сложности (будут заполняться программно) -->
+            <ImageView
+                android:id="@+id/star_1"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_star_filled"
+                tools:ignore="ContentDescription" />
+            <ImageView
+                android:id="@+id/star_2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_star_filled"
+
+                tools:ignore="ContentDescription" />
+            <ImageView
+                android:id="@+id/star_3"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_star_unfilled"
+                tools:ignore="ContentDescription" />
+            <ImageView
+                android:id="@+id/star_4"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_star_unfilled"
+                tools:ignore="ContentDescription" />
+            <ImageView
+                android:id="@+id/star_5"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_star_unfilled"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

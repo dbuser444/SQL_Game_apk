@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">SQL_Game</string>
+
+    <!-- Login/Auth -->
+    <string name="auth_title">Авторизация</string>
+    <string name="mode_student">Ученик</string>
+    <string name="mode_teacher">Преподаватель</string>
+    <string name="hint_email">Почта</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_username">Имя пользователя</string>
+    <string name="action_login">Войти</string>
+    <string name="action_signup">Зарегистрироваться</string>
+    <string name="action_guest">Гостевой режим</string>
+    <string name="toggle_to_signup">У меня нет аккаунта. Перейти к регистрации</string>
+    <string name="toggle_to_login">Уже есть аккаунт. Перейти ко входу</string>
+    <string name="loading">Загрузка...</string>
+    <string name="auth_success">Авторизация успешна. Добро пожаловать!</string>
+    <string name="auth_failed">Ошибка авторизации. Проверьте данные.</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Мой Профиль</string>
+
+    <!-- Lessons -->
+    <string name="lessons_title">Уроки SQL</string>
+
+    <!-- Errors and other generic -->
+    <string name="error_empty_field">Это поле обязательно для заполнения</string>
+    <string name="error_invalid_email">Введите корректный email</string>
+    <string name="error_password_length">Пароль должен быть не менее 6 символов</string>
+</resources>
