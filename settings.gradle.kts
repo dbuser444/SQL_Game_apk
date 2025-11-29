@@ -1,4 +1,5 @@
 pluginManagement {
+    // Репозитории для поиска плагинов (ВАЖНО: Google() всегда должен быть первым для Android)
     repositories {
         google {
             content {
@@ -11,16 +12,15 @@ pluginManagement {
         gradlePluginPortal()
     }
 
+    // Объявление плагинов для использования в проекте
     plugins {
         // Стандартные плагины Android и Kotlin
-        id("com.android.application") version "8.9.0" apply false
-        id("org.jetbrains.kotlin.android") version "1.8.10" apply false
+        id("com.android.application") version "8.5.0" apply false // Обновлено до 8.5.0
+        id("org.jetbrains.kotlin.android") version "2.0.0" apply false // Обновлено до 2.0.0
 
         // Плагин Firebase (Google Services)
-        // Он должен быть здесь, чтобы Gradle мог найти его.
-        id("com.google.gms.google-services") version "4.4.0" apply false
+        id("com.google.gms.google-services") version "4.4.1" apply false
     }
-    // ==================================
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)

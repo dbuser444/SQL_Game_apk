@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SQL_Game</string>
+    <!-- App -->
+    <string name="app_name">SQL Quest</string>
 
     <!-- Login/Auth -->
     <string name="auth_title">Авторизация</string>
@@ -17,8 +19,11 @@
     <string name="auth_success">Авторизация успешна. Добро пожаловать!</string>
     <string name="auth_failed">Ошибка авторизации. Проверьте данные.</string>
 
-    <!-- Profile -->
+    <!-- Profile (ОБНОВЛЕНО) -->
     <string name="profile_title">Мой Профиль</string>
+    <string name="profile_level">Уровень: %d</string>
+    <string name="profile_xp">XP: %d</string>
+    <string name="profile_crystals">Кристаллы: %d</string>
 
     <!-- Lessons -->
     <string name="lessons_title">Уроки SQL</string>
@@ -27,4 +32,72 @@
     <string name="error_empty_field">Это поле обязательно для заполнения</string>
     <string name="error_invalid_email">Введите корректный email</string>
     <string name="error_password_length">Пароль должен быть не менее 6 символов</string>
+
+    <string name="auth_register">Зарегистрироваться</string>
+    <string name="lessons_header">Уроки SQL</string>
+    <string name="button_logout">Выход</string>
+    <string name="lessons_list_description">Список доступных уроков по SQL</string>
+
+    <string name="loading_profile">Загрузка профиля…</string>
+    <string name="content_desc_lessons_list">Список интерактивных уроков по SQL</string>
+    <string name="content_desc_loading_overlay">Профиль загружается</string>
+
+
+    <string name="text_level_placeholder">Уровень: </string>
+    <string name="text_xp_placeholder">XP: </string>
+    <string name="text_crystals_placeholder">Кристаллы: </string>
+    <string name="lessons_header_title">Доступные Уроки</string>
+
+    <string name="error_email_already_registered_prompt_login">Этот email уже зарегистрирован. Пожалуйста, войдите в систему.</string>
+    <string name="error_login_failed_check_credentials">Ошибка входа. Проверьте ваш email и пароль.</string>
+
+    <!-- Ресурсы для адаптера уроков -->
+    <string name="lesson_title_format">Урок %1$s: %2$s</string>
+    <string name="required_xp_format">Требуется %d XP</string>
+    <string name="lesson_locked_message">Урок заблокирован! Требуется %d XP для открытия.</string>
+    <string name="content_desc_lesson_status">Статус урока: заблокирован или готов к игре.</string>
+
+    <!-- Предполагаемые ресурсы для Login/Register -->
+    <string name="login_title">Вход</string>
+    <string name="register_title">Регистрация</string>
+
+    <!-- Ресурсы для экрана игры LessonPlayActivity (новые) -->
+    <string name="button_run_query">Выполнить запрос</string>
+    <string name="button_next_task">Следующее задание</string>
+    <string name="task_instruction_header">Задание:</string>
+    <string name="query_input_hint">Введите ваш SQL-запрос (например, SELECT * FROM Table;)</string>
+    <string name="result_header_correct">✅ Задание выполнено!</string>
+    <string name="result_header_incorrect">❌ Ошибка выполнения</string>
+    <string name="result_header_error">❗ Синтаксическая ошибка SQL</string>
+    <string name="result_data_header">Результат вашего запроса:</string>
+    <string name="result_data_empty">Нет данных для отображения.</string>
+    <string name="placeholder_instruction">Загрузка задания...</string>
+    <string name="reward_message">Получено: %d Кристаллов!</string>
+    <string name="completion_message">Урок завершен! Отличная работа!</string>
+
+    <!-- Строка, которую вы запросили, для описания иконки статуса задания -->
+    <string name="task_status_icon_desc">Иконка статуса задания</string>
+
+    <!-- Пример другой часто используемой строки -->
+    <string name="action_settings">Настройки</string>
+
+    <!-- LessonPlayActivity Strings -->
+    <string name="error_task_not_found">Задание не найдено. Пожалуйста, вернитесь на карту уроков.</string>
+    <string name="button_continue">Продолжить</string>
+    <string name="button_check">Проверить</string>
+    <string name="message_task_already_completed">Задание уже выполнено. Нажмите «Продолжить».</string>
+    <string name="error_sql_empty">Введите SQL-запрос.</string>
+    <string name="message_task_success">Отлично! Задание выполнено правильно.</string>
+    <string name="message_task_incorrect">Неверный результат. Попробуйте еще раз или используйте подсказку.</string>
+    <string name="message_proceeding_to_next">Переход к следующему заданию...</string>
+    <string name="message_no_hint_available">Подсказка для этого задания недоступна.</string>
+
+    <!-- НОВЫЕ СТРОКИ ДЛЯ СТАТУСА ЗАПРОСА -->
+    <string name="query_result_success_rows">Запрос выполнен. Строк в результате: %d</string>
+    <string name="query_result_error">Ошибка выполнения SQL-запроса: %s</string>
+    <string name="query_result_incorrect">Запрос выполнен, но результат не соответствует заданию.</string>
+
+    <string name="channel_name">Ежедневные напоминания SQL</string>
+    <string name="channel_description">Напоминания о необходимости позаниматься SQL.</string>
+
 </resources>

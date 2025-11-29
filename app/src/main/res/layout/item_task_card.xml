@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Иконка статуса задания -->
+        <!-- Соответствует ID image_task_status_icon из предыдущих запросов -->
+        <ImageView
+            android:id="@+id/image_task_status_icon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/task_status_icon_desc"
+            tools:src="@drawable/ic_pending_circle"
+            app:tint="@color/yellow" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Текст задания и номер. Для простоты здесь будем отображать "1. Выберите только имена..." -->
+            <!-- ID text_task_number здесь отсутствует, но его функционал будет объединен с text_task_prompt -->
+            <TextView
+                android:id="@+id/text_task_prompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_dark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="1. Выберите только имена (name) всех воинов из таблицы Воины." />
+
+            <!-- Дополнительная информация (например, требование к запросу, если применимо) -->
+            <TextView
+                android:id="@+id/text_task_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/primary_dark"
+                android:layout_marginTop="4dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="Тип: Практика (SQL), Требуемый запрос: SELECT name FROM warriors;" />
+
+        </LinearLayout>
+
+        <!-- Счет за выполнение (например, кристаллы) -->
+        <TextView
+            android:id="@+id/text_task_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/gren"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:drawablePadding="4dp"
+            app:drawableStartCompat="@drawable/ic_crystal"
+            tools:text="+5" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

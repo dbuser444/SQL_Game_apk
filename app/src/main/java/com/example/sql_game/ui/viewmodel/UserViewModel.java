@@ -1,6 +1,7 @@
 package com.example.sql_game.ui.viewmodel;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.Transformations;
 import com.example.sql_game.data.model.UserModel;
@@ -10,31 +11,39 @@ import com.google.firebase.auth.FirebaseUser;
 /**
  * ViewModel для предоставления данных пользователя (профиль, статус авторизации)
  * пользовательскому интерфейсу.
- * Использует UserRepository для работы с Firebase.
+ * Использует UserRepository (Singleton) для работы с Firebase.
  */
 public class UserViewModel extends ViewModel {
 
     private final UserRepository userRepository;
 
-    // LiveData из репозитория для отслеживания состояния входа (FirebaseUser)
+    // LiveData, полученные из репозитория:
     private final LiveData<FirebaseUser> firebaseUserLiveData;
-    // LiveData из репозитория для отслеживания данных пользователя (из Firestore)
     private final LiveData<UserModel> currentUserData;
-    // LiveData для сообщений об ошибках/успехе
-    private final LiveData<String> authMessage;
-    // LiveData для статуса входа (Boolean)
-    private final LiveData<Boolean> isLoggedInLiveData; // <-- Добавлена LiveData для статуса
+
+    // MutableLiveData для сообщений об аутентификации.
+    // Используется MutableLiveData, чтобы ViewModel могла очистить сообщение после отображения.
+    private final MutableLiveData<String> authMessage;
+
+    // LiveData для статуса входа, полученная через Transformations.map
+    private final LiveData<Boolean> isLoggedInLiveData;
 
     public UserViewModel() {
-        // Инициализация репозитория (предполагаем, что он инициализируется здесь)
-        userRepository = new UserRepository();
+        // Использование статического метода getInstance() для получения единственного экземпляра репозитория
+        userRepository = UserRepository.getInstance();
 
-        // Получение LiveData из репозитория
+        // Инициализация LiveData из репозитория.
         firebaseUserLiveData = userRepository.getFirebaseUserLiveData();
         currentUserData = userRepository.getCurrentUserData();
-        authMessage = userRepository.getAuthMessage();
 
-        // ИСПРАВЛЕНО: Добавление LiveData для проверки статуса входа
+        // Получаем ссылку на MutableLiveData из репозитория для управления состоянием сообщения.
+        // Выполняем явное приведение типа, предполагая, что репозиторий возвращает MutableLiveData.
+        // Это необходимо для последующего вызова authMessage.setValue(null) в clearAuthMessage().
+        @SuppressWarnings("unchecked")
+        MutableLiveData<String> message = (MutableLiveData<String>) userRepository.getAuthMessage();
+        this.authMessage = message;
+
+        // Создание LiveData для проверки статуса входа: true, если FirebaseUser не null.
         isLoggedInLiveData = Transformations.map(firebaseUserLiveData, user -> user != null);
     }
 
@@ -55,61 +64,75 @@ public class UserViewModel extends ViewModel {
         return authMessage;
     }
 
-    /** Возвращает LiveData с булевым значением статуса входа. */
+    /** Возвращает LiveData с булевым значением статуса входа (true/false). */
     public LiveData<Boolean> getIsLoggedIn() {
         return isLoggedInLiveData;
+    }
+
+    // --- МЕТОД ОЧИСТКИ ---
+
+    /**
+     * Очищает текущее сообщение об аутентификации (устанавливает null).
+     * Вызывается из Activity/Fragment после отображения Toast, чтобы предотвратить
+     * его повторное появление при пересоздании View (например, при смене ориентации).
+     */
+    public void clearAuthMessage() {
+        // Установка null на MutableLiveData
+        authMessage.setValue(null);
     }
 
     // --- МЕТОДЫ АУТЕНТИФИКАЦИИ ---
 
     /**
-     * Регистрация: вызывает метод register в репозитории.
-     * @param email
-     * @param password
-     * @param username
+     * Регистрация нового пользователя.
      */
     public void register(String email, String password, String username) {
-        // Предполагаем, что userRepository.register принимает 3 аргумента
         userRepository.register(email, password, username);
     }
 
     /**
-     * Вход: вызывает метод login в репозитории.
-     * @param email
-     * @param password
+     * Вход существующего пользователя.
      */
     public void login(String email, String password) {
         userRepository.login(email, password);
     }
 
     /**
-     * Псевдоним для метода login.
+     * Псевдоним для метода login (более интуитивное название для UI).
      */
     public void signIn(String email, String password) {
         login(email, password);
     }
 
     /**
-     * Псевдоним для метода register.
+     * Псевдоним для метода register (более интуитивное название для UI).
      */
     public void signUp(String email, String password, String username) {
         register(email, password, username);
     }
 
     /**
-     * Выход: вызывает метод logout в репозитории.
+     * Выход пользователя из системы.
      */
     public void logout() {
         userRepository.logout();
     }
 
-    // --- МЕТОДЫ ПРОФИЛЯ ---
+    // --- МЕТОДЫ ПРОФИЛЯ/ПРОГРЕССА ---
 
     /**
-     * Обновление игрового прогресса (XP, Level и т.д.).
+     * Обновление данных пользователя в Firestore (XP, Level, прогресс).
      * @param user Обновленная модель пользователя.
      */
     public void updateUserData(UserModel user) {
         userRepository.updateUserData(user);
+    }
+
+    /**
+     * Обновляет ID выбранной аватарки пользователя.
+     * @param avatarId ID новой аватарки (например, "avatar_1").
+     */
+    public void updateAvatar(String avatarId) {
+        userRepository.updateAvatar(avatarId);
     }
 }

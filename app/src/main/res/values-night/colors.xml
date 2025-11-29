@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FFFFFFFF</color>
+    <color name="white">#DB4C7D</color>
     <color name="primary">#30689E</color>
     <color name="primary_dark">#3F51B5</color>
     <color name="colorError">#B00020</color>
@@ -11,7 +11,7 @@
     <color name="very_light_gray">#B6C2CA</color>
     <color name="gren">#4CAF50</color>
     <color name="yellow">#FFEB3B</color>
-    <color name="background">#FAFAFA</color>
+    <color name="background">#323232</color>
 
     <!-- Цвета статусов -->
     <color name="color_success">#4CAF50</color>

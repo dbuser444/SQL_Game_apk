@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.example.sql_game.LessonPlayActivity">
+
+    <!-- Верхняя панель (Toolbar) -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/primary"
+        android:elevation="4dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white"
+            app:title="Урок SQL"
+            android:background="@color/primary">
+
+            <!-- 1. КНОПКА НАЗАД -->
+            <ImageButton
+                android:id="@+id/button_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_left_arrow"
+                app:tint="@color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Назад"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                android:layout_gravity="start"
+                android:layout_marginEnd="16dp" />
+
+
+            <!-- СКРЫТЫЙ ЭЛЕМЕНТ: star_icon для совместимости с LessonPlayActivity.java -->
+            <ImageView
+                android:id="@+id/star_icon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                android:contentDescription="Скрытая иконка статуса"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Scrollable Content Area -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ОБЩИЙ ЗАГОЛОВОК УРОКА -->
+            <TextView
+                android:id="@+id/lesson_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                tools:text="Урок X.Y: Общий заголовок" />
+
+            <!-- ============================================= -->
+            <!-- 1. БЛОК ТЕОРИИ (theory_container) - Из activity_lesson_theory.xml -->
+            <!-- ============================================= -->
+            <LinearLayout
+                android:id="@+id/theory_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                tools:visibility="visible">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ключевые принципы:"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#3F51B5"
+                            android:layout_marginBottom="8dp"/>
+
+                        <!-- Описание (lesson_description) - Полное содержание теории/инструкция для практики -->
+                        <TextView
+                            android:id="@+id/lesson_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#333333"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="4dp"
+                            tools:text="Здесь будет загружена полная теоретическая часть урока." />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#E0E0E0"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Синтаксис:"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="4dp"/>
+
+                        <!-- Блок с синтаксическим примером -->
+                        <TextView
+                            android:id="@+id/text_syntax_example"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:background="@color/fon"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            tools:text="SELECT column1, column2 \nFROM table_name;" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!-- ============================================= -->
+            <!-- 2. БЛОК ПРАКТИКИ (practice_container) - Из activity_lesson_practice.xml -->
+            <!-- ============================================= -->
+            <LinearLayout
+                android:id="@+id/practice_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <!-- 2.1. Виртуальная База Данных (Исходная таблица) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- ИСПРАВЛЕНО: Добавлен ID для динамического изменения заголовка и управления видимостью -->
+                        <TextView
+                            android:id="@+id/text_source_table_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="Исходные данные (Текущая Таблица - 'Название')"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_marginBottom="8dp"
+                            android:visibility="gone"/>
+
+                        <!-- Здесь будет отображаться исходная таблица БД -->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_source_table"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="80dp"
+                            android:background="@color/fon"
+                            android:padding="4dp"
+                            tools:listitem="@layout/item_table_row"
+                            android:visibility="gone"
+                            tools:itemCount="3"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- 2.2. Список Заданий -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Задания для выполнения:"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_dark"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_tasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_task_card"
+                    tools:itemCount="3"/>
+
+                <!-- 2.3. Секция Ввода Запроса (sql_input) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Твой SQL-запрос:"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Заголовок запроса -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Редактор кода"
+                            android:textColor="@color/white"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="16dp"
+                            android:paddingBottom="8dp"
+                            android:background="@color/primary_dark"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <!-- Поле ввода SQL-запроса (sql_input) -->
+                        <EditText
+                            android:id="@+id/sql_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="120dp"
+                            android:background="@color/fon"
+                            android:gravity="top|start"
+                            android:inputType="textMultiLine"
+                            android:hint="SELECT ..."
+                            android:padding="12dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:fontFamily="monospace"
+                            tools:text="SELECT name, level FROM warriors;" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- 2.4. Область действий (Кнопки) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- ВОССТАНОВЛЕННАЯ КНОПКА: Выполнить и Проверить -->
+                    <Button
+                        android:id="@+id/button_execute_query"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Выполнить и Проверить"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/primary"/>
+
+                    <Button
+                        android:id="@+id/button_hint"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Получить подсказку"
+                        android:textColor="@color/primary_dark"
+                        android:backgroundTint="@color/white"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- ============================================= -->
+            <!-- 3. ОБЩИЙ РЕЗУЛЬТАТ (ОТОБРАЖАЕТСЯ В ОБОИХ КОНТЕЙНЕРАХ) -->
+            <!-- ============================================= -->
+
+            <!-- Индикатор загрузки (progress_bar) -->
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Контейнер статуса (status_layout) и Сообщение о статусе (status_message) -->
+            <LinearLayout
+                android:id="@+id/status_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/fon"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                tools:background="#4CAF50"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/status_message"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    tools:text="Ожидание выполнения запроса..."/>
+            </LinearLayout>
+
+            <!-- Result Table Title -->
+            <TextView
+                android:id="@+id/text_result_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Результат выполнения:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <!-- Result Table (result_table) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/result_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:background="@color/fon"
+                android:padding="4dp"
+                android:visibility="gone"
+                tools:listitem="@layout/item_table_row"
+                tools:itemCount="5"
+                tools:layout_height="200dp"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- УНИВЕРСАЛЬНАЯ КНОПКА НАВИГАЦИИ (check_button) внизу экрана -->
+    <!-- Используется для перехода: Теория -> Практика или Задание -> Следующее Задание -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:elevation="8dp">
+
+        <Button
+            android:id="@+id/check_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Закончить"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary_dark"/>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

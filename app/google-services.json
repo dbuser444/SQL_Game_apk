@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "991420624571",
+    "project_id": "sqlgame-644ca",
+    "storage_bucket": "sqlgame-644ca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991420624571:android:d975e006d3e88978ba439e",
+        "android_client_info": {
+          "package_name": "com.example.sql_game"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcewfObC933xj8bF4wWWEHoPr57s8W3bk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

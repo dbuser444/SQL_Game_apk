@@ -1,14 +1,15 @@
-// В этом файле применяются плагины, которые были объявлены в build.gradle.kts (SQL_Game)
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Это не корневой файл, это файл модуля 'app'
 plugins {
+    // Стандартные плагины (должны быть здесь)
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services")
+    // 1. ПРИМЕНЕНИЕ ПЛАГИНА GOOGLE SERVICES
+    id("com.google.gms.google-services") // <<--- ДОБАВЛЕНО ЭТО
 }
 
 android {
-    // Необходимо указать, чтобы Gradle знал, что это Android-проект
-    // Здесь мы явно объявляем все необходимые Android-конфигурации
-    namespace = "com.example.sql_game"
+    namespace = "com.example.sql_game" // Замените на ваше фактическое пространство имен
     compileSdk = 34
 
     defaultConfig {
@@ -41,37 +42,24 @@ android {
 
 dependencies {
 
-    // --- СТАНДАРТНЫЕ ANDROID ЗАВИСИМОСТИ ---
+    // Стандартные зависимости AndroidX
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.10.0")
+    implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 
-    // --- FIREBASE (АУТЕНТИФИКАЦИЯ и FIRESTORE) ---
-    // Используем BOM для управления версиями Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    // 2. ИМПОРТ BOM ДЛЯ УПРАВЛЕНИЯ ВЕРСИЯМИ FIREBASE
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
 
-    // Firebase Authentication (Auth) - используем -ktx
-    implementation("com.google.firebase:firebase-auth-ktx")
+    // 3. ДОБАВЛЕНИЕ ЗАВИСИМОСТЕЙ FIREBASE
+    implementation("com.google.firebase:firebase-auth") // Для аутентификации (login/register)
+    implementation("com.google.firebase:firebase-firestore") // Для профилей, уроков, групп
 
-    // Firebase Firestore (База данных) - используем -ktx
-    implementation("com.google.firebase:firebase-firestore-ktx")
+    // Возможно, вам также нужна эта библиотека для использования расширений ktx в LiveData/ViewModel
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
-    // --- MVVM (LIFECYCLE) ЗАВИСИМОСТИ ---
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    // LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
-
-    // Coroutine Lifecycle Scopes (полезно для ViewModel)
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-
-    // --- КОТЛИН (КОРУТИНЫ) ---
-    // Базовые Coroutines для асинхронной работы
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
-    // --- ТЕСТЫ ---
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

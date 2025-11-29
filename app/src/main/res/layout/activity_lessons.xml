@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
+    android:background="@color/background"
     tools:context=".LessonsActivity">
 
     <!-- Заголовок и Профиль Пользователя -->
@@ -43,7 +42,6 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="8dp">
 
-                <!-- Уровень -->
                 <TextView
                     android:id="@+id/text_level"
                     android:layout_width="0dp"
@@ -51,9 +49,9 @@
                     android:layout_weight="1"
                     android:textSize="14sp"
                     android:textColor="#424242"
-                    tools:text="Уровень: 5" />
+                    tools:text="Уровень: 5"
+                    android:text="@string/text_level_placeholder" />
 
-                <!-- XP -->
                 <TextView
                     android:id="@+id/text_xp"
                     android:layout_width="0dp"
@@ -61,7 +59,8 @@
                     android:layout_weight="1"
                     android:textSize="14sp"
                     android:textColor="#424242"
-                    tools:text="XP: 1200" />
+                    tools:text="XP: 1200"
+                    android:text="@string/text_xp_placeholder" />
             </LinearLayout>
 
             <!-- Кристаллы -->
@@ -73,7 +72,8 @@
                 android:drawablePadding="4dp"
                 android:textSize="14sp"
                 android:textColor="#424242"
-                tools:text="Кристаллы: 15" />
+                tools:text="Кристаллы: 15"
+                android:text="@string/text_crystals_placeholder" />
 
             <!-- Кнопка Выход -->
             <Button
@@ -81,11 +81,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Выход"
+                android:text="@string/button_logout"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 app:strokeColor="@color/design_default_color_error"
                 android:textColor="@color/design_default_color_error"/>
 
+
+            <!-- НОВАЯ КНОПКА: Установить Напоминание -->
+            <Button
+                android:id="@+id/btn_set_reminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Установить ежедневное напоминание"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:textColor="@color/design_default_color_primary"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                android:gravity="start|center_vertical" />
+            <!-- - КОНЕЦ СЕКЦИИ НАПОМИНАНИЙ - -->
+
+            <!-- Загрузочный оверлей -->
             <FrameLayout
                 android:id="@+id/loading_overlay"
                 android:layout_width="match_parent"
@@ -94,7 +110,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="gone"
-                tools:visibility="visible">
+                android:contentDescription="@string/content_desc_loading_overlay"
+                tools:visibility="gone">
 
                 <ProgressBar
                     android:layout_width="wrap_content"
@@ -106,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="50dp"
-                    android:text="Загрузка профиля..."
+                    android:text="@string/loading_profile"
                     android:textColor="@color/design_default_color_primary_dark"
                     android:textSize="16sp" />
             </FrameLayout>
@@ -121,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Доступные Уроки"
+        android:text="@string/lessons_header_title"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,13 +153,12 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:clipToPadding="false"
+        android:contentDescription="@string/content_desc_lessons_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_lessons_header"
-        tools:listitem="@layout/item_lesson"
+        tools:listitem="@layout/item_lesson_card"
         tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    <!-- Загрузочный оверлей (loading_overlay) -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

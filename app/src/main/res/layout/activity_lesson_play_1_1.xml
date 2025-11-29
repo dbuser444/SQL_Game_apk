@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sql_game.LessonPlayActivity">
+
+    <!-- Верхняя панель (Toolbar) - ВОССТАНОВЛЕНА ОРИГИНАЛЬНАЯ СТРУКТУРА -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/primary"
+        android:elevation="4dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_theory"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white"
+            app:title="Теория"
+            android:background="@color/primary">
+
+            <!-- 1. НАСТРАИВАЕМАЯ КНОПКА НАЗАД (48dp, с корректным отступом) -->
+            <ImageButton
+                android:id="@+id/button_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_left_arrow"
+                app:tint="@color/white"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Назад"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                android:layout_gravity="start"
+                android:layout_marginEnd="16dp" />
+
+            <!-- 2. Виджет статистики, выровненный вправо - ОРИГИНАЛЬНЫЙ ВКЛЮЧАЕМЫЙ МАКЕТ -->
+            <include layout="@layout/widget_user_stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"/>
+
+            <!-- СКРЫТЫЙ ЭЛЕМЕНТ: star_icon для совместимости с LessonPlayActivity.java -->
+            <ImageView
+                android:id="@+id/star_icon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                android:contentDescription="Скрытая иконка статуса"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Scrollable Content Area -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- 1. Заголовок Урока (lesson_title - ID для Java-кода) -->
+            <TextView
+                android:id="@+id/lesson_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"
+                tools:text="Урок 1.1: Основы SELECT (Теория)" />
+
+            <!-- 2. Теоретический блок (Расширенное описание) -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ключевые принципы SELECT:"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#3F51B5"
+                        android:layout_marginBottom="8dp"/>
+
+                    <!-- Описание (lesson_description - ID для Java-кода) -->
+                    <TextView
+                        android:id="@+id/lesson_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="4dp"
+                        tools:text="Команда SELECT используется для извлечения данных из базы данных. Это начало любого взаимодействия с SQL. Без SELECT мы не можем увидеть, что хранится в таблицах. \n\n1. SELECT * : Выбирает все столбцы. Это удобно для быстрого просмотра, но неэффективно для больших систем. \n2. SELECT column1, column2 : Выбирает только указанные столбцы. Это улучшает производительность и уменьшает нагрузку." />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E0E0E0"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Синтаксис:"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp"/>
+
+                    <!-- Блок с синтаксическим примером -->
+                    <TextView
+                        android:id="@+id/text_syntax_example"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:background="@color/fon"
+                        android:fontFamily="monospace"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        tools:text="SELECT column1, column2 \nFROM table_name \nWHERE condition;" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- СКРЫТЫЕ ЭЛЕМЕНТЫ ПРАКТИКИ: Добавлены только для LessonPlayActivity.java -->
+
+            <!-- Поле ввода SQL (sql_input) -->
+            <EditText
+                android:id="@+id/sql_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <!-- Индикатор загрузки (progress_bar) -->
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <!-- Таблица результатов (result_table) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/result_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Кнопка "Перейти к практике" внизу экрана (check_button - ID для Java-кода) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:elevation="8dp">
+
+        <!-- Контейнер статуса (status_layout) -->
+        <LinearLayout
+            android:id="@+id/status_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone">
+
+            <!-- Сообщение о статусе (status_message) -->
+            <TextView
+                android:id="@+id/status_message"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                tools:text="Статус: Успешно!" />
+        </LinearLayout>
+
+        <!-- Кнопка проверки/продолжения (check_button) -->
+        <Button
+            android:id="@+id/check_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Перейти к Практике (1.2)"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary_dark"/>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

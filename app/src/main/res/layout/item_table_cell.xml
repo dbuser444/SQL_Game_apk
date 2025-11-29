@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="0dp">
+
+    <!-- Этот TextView будет содержать текст ячейки. Его ID 'text_cell_content' теперь разрешен. -->
+    <TextView
+        android:id="@+id/text_cell_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:minWidth="80dp"
+        android:background="@drawable/table_cell_background"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:text="Cell Content" />
+
+</LinearLayout>
